@@ -10,6 +10,7 @@ pd.set_option('display.precision', 2)
 
 # titanic_data = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.csv')
 titanic_data = pd.read_csv('./titanic.csv')
+titanic_data.columns = [x.lower() for x in titanic_data.columns]
 
 # print type(titanic_data)
 # print titanic_data.head()
@@ -25,38 +26,38 @@ total_survivor_age = 0
 total_fatality_age = 0
 
 # clean data
-nan_ages = np.isnan(titanic_data.Age)
-mean_age = titanic_data['Age'][~nan_ages].mean()
-titanic_data['Age'][nan_ages] = mean_age
+nan_ages = np.isnan(titanic_data.age)
+mean_age = titanic_data['age'][~nan_ages].mean()
+titanic_data['age'][nan_ages] = mean_age
 
 for index, person in titanic_data.iterrows():
   all_people.insert(0, person);
-  if person.Sex == 'male':
+  if person.sex == 'male':
     men.insert(0, person)
-    if person.Survived == 1:
+    if person.survived == 1:
       men_survived.insert(0, person)
-  if person.Sex == 'female':
+  if person.sex == 'female':
     women.insert(0, person)
-    if person.Survived == 1:
+    if person.survived == 1:
       women_survived.insert(0, person)
-  if person.Survived == 1:
+  if person.survived == 1:
     survivors.insert(0, person)
-    total_survivor_age += person.Age
+    total_survivor_age += person.age
   else:
     fatalaties.insert(0, person)
-    total_fatality_age += person.Age
+    total_fatality_age += person.age
 
-titanic_data["class"] = titanic_data.Pclass.map({1: "First", 2: "Second", 3: "Third"})
+titanic_data["class"] = titanic_data.pclass.map({1: "First", 2: "Second", 3: "Third"})
 
-first_class_fatalaties = titanic_data[(titanic_data['Survived'] == 0) & (titanic_data['Pclass'] == 1)]
-first_class_survivors = titanic_data[(titanic_data['Survived'] == 1) & (titanic_data['Pclass'] == 1)]
-second_class_fatalaties = titanic_data[(titanic_data['Survived'] == 0) & (titanic_data['Pclass'] == 2)]
-second_class_survivors = titanic_data[(titanic_data['Survived'] == 1) & (titanic_data['Pclass'] == 2)]
-third_class_fatalaties = titanic_data[(titanic_data['Survived'] == 0) & (titanic_data['Pclass'] == 3)]
-third_class_survivors = titanic_data[(titanic_data['Survived'] == 1) & (titanic_data['Pclass'] == 3)]
-first_class_passengers = titanic_data[(titanic_data['Pclass'] == 1)]
-second_class_passengers = titanic_data[(titanic_data['Pclass'] == 2)]
-third_class_passengers = titanic_data[(titanic_data['Pclass'] == 3)]
+first_class_fatalaties = titanic_data[(titanic_data['survived'] == 0) & (titanic_data['pclass'] == 1)]
+first_class_survivors = titanic_data[(titanic_data['survived'] == 1) & (titanic_data['pclass'] == 1)]
+second_class_fatalaties = titanic_data[(titanic_data['survived'] == 0) & (titanic_data['pclass'] == 2)]
+second_class_survivors = titanic_data[(titanic_data['survived'] == 1) & (titanic_data['pclass'] == 2)]
+third_class_fatalaties = titanic_data[(titanic_data['survived'] == 0) & (titanic_data['pclass'] == 3)]
+third_class_survivors = titanic_data[(titanic_data['survived'] == 1) & (titanic_data['pclass'] == 3)]
+first_class_passengers = titanic_data[(titanic_data['pclass'] == 1)]
+second_class_passengers = titanic_data[(titanic_data['pclass'] == 2)]
+third_class_passengers = titanic_data[(titanic_data['pclass'] == 3)]
 
 print "1. How many passengers are in our passenger list? From here forward, we'll assume our dataset represents the full passenger list for the Titanic."
 print len(all_people) #1
@@ -71,7 +72,7 @@ print len(men_survived) / len(men) #5
 print "6. What is the overall survival rate of female passengers?"
 print len(women_survived) / len(women)
 print "7. What is the average age of all passengers onboard?"
-print titanic_data['Age'].mean()
+print titanic_data['age'].mean()
 print "a. How did you calculate this average age?"
 print "Restricting it to people that did not have a NaN age"
 print "b. Note that some of the passengers do not have an age value. How did you deal with this? What are some other ways of dealing with this?"
