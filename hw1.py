@@ -8,38 +8,38 @@ import matplotlib.pyplot as plt
 #Floats only show two digits for display
 pd.set_option('display.precision', 2)
 
-# titanic_data = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.csv')
-titanic_data = pd.read_csv('./titanic.csv')
+# data = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.csv')
+data = pd.read_csv('./titanic.csv')
 
 # since one csv has uppercased column names, standardize to lower
-titanic_data.columns = [x.lower() for x in titanic_data.columns]
+data.columns = [x.lower() for x in data.columns]
 
 # clean data
-nan_ages = np.isnan(titanic_data.age)
-mean_age = titanic_data['age'][~nan_ages].mean()
-titanic_data['age'][nan_ages] = mean_age
-titanic_data["class"] = titanic_data.pclass.map({1: "First", 2: "Second", 3: "Third"})
+nan_ages = np.isnan(data.age)
+mean_age = data['age'][~nan_ages].mean()
+data['age'][nan_ages] = mean_age
+data["class"] = data.pclass.map({1: "First", 2: "Second", 3: "Third"})
 
-survivors = titanic_data[(titanic_data['survived'] == 1)]
-fatalaties = titanic_data[(titanic_data['survived'] == 0)]
-women = titanic_data[(titanic_data['sex'] == 'female')]
-men = titanic_data[(titanic_data['sex'] == 'male')]
-women_survived = women[(titanic_data['survived'] == 1)]
-men_survived = men[(titanic_data['survived'] == 1)]
-first_class_fatalaties = fatalaties[(titanic_data['pclass'] == 1)]
-second_class_fatalaties = fatalaties[(titanic_data['pclass'] == 2)]
-third_class_fatalaties = fatalaties[(titanic_data['pclass'] == 3)]
-first_class_survivors = survivors[(titanic_data['pclass'] == 1)]
-second_class_survivors = survivors[(titanic_data['pclass'] == 2)]
-third_class_survivors = survivors[(titanic_data['pclass'] == 3)]
-first_class_passengers = titanic_data[(titanic_data['pclass'] == 1)]
-second_class_passengers = titanic_data[(titanic_data['pclass'] == 2)]
-third_class_passengers = titanic_data[(titanic_data['pclass'] == 3)]
+survivors = data[(data['survived'] == 1)]
+fatalaties = data[(data['survived'] == 0)]
+women = data[(data['sex'] == 'female')]
+men = data[(data['sex'] == 'male')]
+women_survived = women[(data['survived'] == 1)]
+men_survived = men[(data['survived'] == 1)]
+first_class_fatalaties = fatalaties[(data['pclass'] == 1)]
+second_class_fatalaties = fatalaties[(data['pclass'] == 2)]
+third_class_fatalaties = fatalaties[(data['pclass'] == 3)]
+first_class_survivors = survivors[(data['pclass'] == 1)]
+second_class_survivors = survivors[(data['pclass'] == 2)]
+third_class_survivors = survivors[(data['pclass'] == 3)]
+first_class_passengers = data[(data['pclass'] == 1)]
+second_class_passengers = data[(data['pclass'] == 2)]
+third_class_passengers = data[(data['pclass'] == 3)]
 
 print "1. How many passengers are in our passenger list? From here forward, we'll assume our dataset represents the full passenger list for the Titanic."
-print len(titanic_data) #1
+print len(data) #1
 print "2. What is the overall survival rate?"
-print len(survivors) / len(titanic_data) #2
+print len(survivors) / len(data) #2
 print "3. How many male passengers were onboard?"
 print len(men) #3
 print "4. How many female passengers were onboard?"
@@ -49,7 +49,7 @@ print len(men_survived) / len(men)
 print "6. What is the overall survival rate of female passengers?"
 print len(women_survived) / len(women)
 print "7. What is the average age of all passengers onboard?"
-print titanic_data['age'].mean()
+print data['age'].mean()
 print "a. How did you calculate this average age?"
 print "Restricting it to people that did not have a NaN age"
 print "b. Note that some of the passengers do not have an age value. How did you deal with this? What are some other ways of dealing with this?"
@@ -61,7 +61,7 @@ print fatalaties['age'].mean()
 print "10. At this (early) point in our analysis, what might you infer about any patterns you are seeing?"
 print "Older males were more likely to die than younger females"
 print "11. How many passengers are in each of the three classes of service (e.g. First, Second, Third?)"
-print titanic_data["class"].value_counts()
+print data["class"].value_counts()
 print "12. What is the survival rate for passengers in each of the three classes of service?"
 print "First class:"
 print len(first_class_survivors) / len(first_class_passengers)
