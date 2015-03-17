@@ -18,20 +18,20 @@ data.columns = [x.lower() for x in data.columns]
 nan_ages = np.isnan(data.age)
 mean_age = data['age'][~nan_ages].mean()
 data['age'][nan_ages] = mean_age
-data["class"] = data.pclass.map({1: "First", 2: "Second", 3: "Third"})
+data['class'] = data.pclass.map({1: "First", 2: "Second", 3: "Third"})
 
 survivors = data[(data['survived'] == 1)]
 fatalaties = data[(data['survived'] == 0)]
 women = data[(data['sex'] == 'female')]
 men = data[(data['sex'] == 'male')]
-women_survived = women[(data['survived'] == 1)]
-men_survived = men[(data['survived'] == 1)]
-first_class_fatalaties = fatalaties[(data['pclass'] == 1)]
-second_class_fatalaties = fatalaties[(data['pclass'] == 2)]
-third_class_fatalaties = fatalaties[(data['pclass'] == 3)]
-first_class_survivors = survivors[(data['pclass'] == 1)]
-second_class_survivors = survivors[(data['pclass'] == 2)]
-third_class_survivors = survivors[(data['pclass'] == 3)]
+women_survived = women[(women['survived'] == 1)]
+men_survived = men[(men['survived'] == 1)]
+first_class_fatalaties = fatalaties[(fatalaties['pclass'] == 1)]
+second_class_fatalaties = fatalaties[(fatalaties['pclass'] == 2)]
+third_class_fatalaties = fatalaties[(fatalaties['pclass'] == 3)]
+first_class_survivors = survivors[(survivors['pclass'] == 1)]
+second_class_survivors = survivors[(survivors['pclass'] == 2)]
+third_class_survivors = survivors[(survivors['pclass'] == 3)]
 first_class_passengers = data[(data['pclass'] == 1)]
 second_class_passengers = data[(data['pclass'] == 2)]
 third_class_passengers = data[(data['pclass'] == 3)]
@@ -61,7 +61,7 @@ print fatalaties['age'].mean()
 print "10. At this (early) point in our analysis, what might you infer about any patterns you are seeing?"
 print "Older males were more likely to die than younger females"
 print "11. How many passengers are in each of the three classes of service (e.g. First, Second, Third?)"
-print data["class"].value_counts()
+print data['class'].value_counts()
 print "12. What is the survival rate for passengers in each of the three classes of service?"
 print "First class:"
 print len(first_class_survivors) / len(first_class_passengers)
