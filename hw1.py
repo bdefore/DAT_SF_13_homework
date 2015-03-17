@@ -20,21 +20,21 @@ mean_age = data['age'][~nan_ages].mean()
 data['age'][nan_ages] = mean_age
 data['class'] = data.pclass.map({1: "First", 2: "Second", 3: "Third"})
 
-survivors = data[(data['survived'] == 1)]
-fatalaties = data[(data['survived'] == 0)]
-women = data[(data['sex'] == 'female')]
-men = data[(data['sex'] == 'male')]
-women_survived = women[(women['survived'] == 1)]
-men_survived = men[(men['survived'] == 1)]
-first_class_fatalaties = fatalaties[(fatalaties['pclass'] == 1)]
-second_class_fatalaties = fatalaties[(fatalaties['pclass'] == 2)]
-third_class_fatalaties = fatalaties[(fatalaties['pclass'] == 3)]
-first_class_survivors = survivors[(survivors['pclass'] == 1)]
-second_class_survivors = survivors[(survivors['pclass'] == 2)]
-third_class_survivors = survivors[(survivors['pclass'] == 3)]
-first_class_passengers = data[(data['pclass'] == 1)]
-second_class_passengers = data[(data['pclass'] == 2)]
-third_class_passengers = data[(data['pclass'] == 3)]
+survivors = data.query('survived == 1')
+fatalaties = data.query('survived == 0')
+women = data.query('sex == "female"')
+men = data.query('sex == "male"')
+women_survived = women.query('survived == 1')
+men_survived = men.query('survived == 1')
+first_class_fatalaties = fatalaties.query('pclass == 1')
+second_class_fatalaties = fatalaties.query('pclass == 2')
+third_class_fatalaties = fatalaties.query('pclass == 3')
+first_class_survivors = survivors.query('pclass == 1')
+second_class_survivors = survivors.query('pclass == 2')
+third_class_survivors = survivors.query('pclass == 3')
+first_class_passengers = data.query('pclass == 1')
+second_class_passengers = data.query('pclass == 2')
+third_class_passengers = data.query('pclass == 3')
 
 print "1. How many passengers are in our passenger list? From here forward, we'll assume our dataset represents the full passenger list for the Titanic."
 print len(data) #1
